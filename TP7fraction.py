@@ -24,7 +24,7 @@ class Fraction:
         """
     
         if den == 0: 
-            raise ValueError("The denomnator can't be zero") 
+            raise TypeError("The denomnator can't be zero") 
         gcd = math.gcd(num, den)# pour avoir un entier 
         self.num = num // gcd 
         self.den = den // gcd 

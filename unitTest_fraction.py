@@ -6,36 +6,37 @@ from TP7fraction import Fraction
 class TestFraction(unittest.TestCase):
 
     def test_init(self):
-        f= Fraction(1,2)
+        f= Fraction(1,2) # initialisation de fraction 
         self.assertEqual(f.numerator, 1)
         self.assertEqual(f.denominator, 2)
-        f = Fraction(6, 8)
-        self.assertEqual(f.numerator, 3) # simplification du numérateur
-        self.assertEqual(f.denominator, 4) # simplification du dénominateur 
 
-        f = Fraction(-4, 6)
+        f = Fraction(6, 8) # simplification irréductibles des fractions 
+        self.assertEqual(f.numerator, 3)
+        self.assertEqual(f.denominator, 4) 
+
+        f = Fraction(-4, 6) # le numérateur négatif 
         self.assertEqual(f.numerator, -2)
         self.assertEqual(f.denominator, 3)
 
-        f = Fraction(1, -3)
+        f = Fraction(1, -3) # le cas du dénominateur négatif 
         self.assertEqual(f.numerator, -1)
         self.assertEqual(f.denominator, 3)
 
-        f = Fraction(-5, -10)
+        f = Fraction(-5, -10) # les deux opérandes sont négatifs 
         self.assertEqual(f.numerator, 1)
         self.assertEqual(f.denominator, 2)
 
-        with self.assertRaises(ValueError): # le dénominateur ne peut pas être 0
+        with self.assertRaises(TypeError): # le dénominateur ne peut pas être 0
             Fraction(1, 0)
 
-        with self.assertRaises(TypeError):
+        with self.assertRaises(TypeError): # fraction dont l'un des opérandes est un non entier (ici c'est une chaine) *-
             Fraction(1, "2")
 
     def test_str(self):
         f = Fraction(3, 4)
         self.assertEqual(str(f), "3/4")
 
-        f= Fraction(5,2)
+        f= Fraction(5,2) 
         self.assertEqual(str(f), "5/2")
 
     def test_add(self):
@@ -43,7 +44,7 @@ class TestFraction(unittest.TestCase):
         f2 = Fraction(3, 4)
         self.assertEqual(f1 + f2, Fraction(17, 12)) # donc 17/12
  
-        with self.assertRaises(TypeError):
+        with self.assertRaises(TypeError): 
             Fraction(1, 2) + "not a fraction"
 
     def test_sub(self):
@@ -77,8 +78,8 @@ class TestFraction(unittest.TestCase):
         f= Fraction(64,12)
         self.assertEqual(f.as_mixed_number(), "5 1/3")
 
-        f = Fraction(-7, 3)
-        self.assertEqual(f.as_mixed_number(), "-2 1/3")
+        f = Fraction(-9, 4)
+        self.assertEqual(f.as_mixed_number(), "-2 1/4")
        
 
     def test_pow(self):
@@ -109,8 +110,6 @@ class TestFraction(unittest.TestCase):
     def test_is_proper(self):
         self.assertTrue(Fraction(3, 4).is_proper())
         self.assertFalse(Fraction(4, 3).is_proper())
-
-
 
     def test_is_zero(self):
         self.assertTrue(Fraction(0, 1).is_zero())
